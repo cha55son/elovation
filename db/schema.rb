@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 7) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "games", force: true do |t|
     t.string   "name",                           null: false
     t.datetime "created_at"
@@ -49,7 +46,7 @@ ActiveRecord::Schema.define(version: 7) do
     t.float    "trueskill_deviation"
   end
 
-  add_index "rating_history_events", ["rating_id"], name: "index_rating_history_events_on_rating_id", using: :btree
+  add_index "rating_history_events", ["rating_id"], name: "index_rating_history_events_on_rating_id"
 
   create_table "ratings", force: true do |t|
     t.integer  "player_id",           null: false
@@ -62,8 +59,8 @@ ActiveRecord::Schema.define(version: 7) do
     t.float    "trueskill_deviation"
   end
 
-  add_index "ratings", ["game_id"], name: "index_ratings_on_game_id", using: :btree
-  add_index "ratings", ["player_id"], name: "index_ratings_on_player_id", using: :btree
+  add_index "ratings", ["game_id"], name: "index_ratings_on_game_id"
+  add_index "ratings", ["player_id"], name: "index_ratings_on_player_id"
 
   create_table "results", force: true do |t|
     t.integer  "game_id",    null: false
@@ -71,7 +68,7 @@ ActiveRecord::Schema.define(version: 7) do
     t.datetime "updated_at"
   end
 
-  add_index "results", ["game_id"], name: "index_results_on_game_id", using: :btree
+  add_index "results", ["game_id"], name: "index_results_on_game_id"
 
   create_table "teams", force: true do |t|
     t.integer  "rank"
