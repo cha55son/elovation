@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= favicon_link_tag 'trophy.png' %>
     <title><%= content_for?(:title) ? yield(:title) : "Elovation" %></title>
     <%= csrf_meta_tags %>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -23,7 +24,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Elovation</a>
+            <%= link_to 'Elovation', dashboard_path, class: 'navbar-brand' %>
         </div>
         <div class="collapse navbar-collapse" id="elovation-main-nav">
             <ul class="nav navbar-nav">
@@ -35,6 +36,7 @@
                             <%= current_player.name %> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><%= link_to 'Profile', player_path(current_player) %></li>
                             <li><%= link_to 'Sign out', destroy_player_session_path, :method => :delete %></li>
                         </ul>
                     </li>

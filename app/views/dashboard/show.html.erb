@@ -1,7 +1,8 @@
-<div class="row">
+<div class="dashboard dashboard-show-page row">
 	<div class="col-sm-8">
-		<h1 class="page-header">Games</h1>
-		<%= link_to "New Game", new_game_path, class: "btn btn-primary" %>
+        <h1 class="page-header">
+            Games <%= link_to "New Game", new_game_path, class: "btn btn-primary" %>
+        </h1>
 		<ul id="games-list">
             <% Game.all.sort_by(&:name).each do |game| %>
                 <li class="<%= "active" if @game == game %> game-list-item">
@@ -39,15 +40,13 @@
 	</div>
 	<div class="col-sm-4">
         <h1 class="page-header">Players</h1>
-        <ul class="players-list">
+        <div class="list-group">
             <% Player.all.sort_by(&:name).each do |player| %>
-                <li class="<%= "active" if @player == player %>">
-                <%= link_to player_path(player) do %>
-                    <%= image_tag(gravatar_url(player, size: 24)) %>
+                <%= link_to player_path(player), class: 'list-group-item player-list-group-item' do %>
+                    <%= image_tag(gravatar_url(player, size: 40)) %>
                     <%= player.name %>
                 <% end %>
-                </li>
             <% end %>
-        </ul>
-	</div>
+        </div>
+    </div>
 </div>
