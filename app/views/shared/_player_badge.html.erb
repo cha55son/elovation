@@ -1,0 +1,10 @@
+<%
+    # @param Player player The player to show the badge for.
+    # @param Hash options Additional options.
+%>
+<div class="player-badge">
+    <%= link_to player_path(player) do %>
+        <%= image_tag(gravatar_url(player)) %>
+    <% end %>
+    <%= link_to player.name, player_path(player), class: 'name' %>
+</div>

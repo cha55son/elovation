@@ -2,13 +2,29 @@
 
     &.dashboard-show-page {
         
+        .games-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            .games-list-item {
+
+                .game-title {
+                    margin-top: 0;
+                }
+                .game-params {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                    
+                    .rating-type {
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
         .player-list-group-item {
 
-            img {
-                margin-right: 10px;
-                border-radius: 20px;
-            }
-            font-size: 20px;
         }
     }
 }
