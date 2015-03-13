@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 20150310031518) do
 
   create_table "games", force: true do |t|
     t.string   "name",                           null: false
@@ -26,11 +26,20 @@ ActiveRecord::Schema.define(version: 7) do
   end
 
   create_table "players", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.string   "username",            default: "", null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "players", ["username"], name: "index_players_on_username", unique: true
 
   create_table "players_teams", force: true do |t|
     t.integer "player_id"

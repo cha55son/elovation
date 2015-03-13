@@ -1,0 +1,14 @@
+defaults: &defaults
+  host: localhost
+  port: 636
+  base: dc=com
+  ssl: simple_tls
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,4 +1,6 @@
 Elovation::Application.routes.draw do
+  devise_for :players
+
   resources :games do
     resources :results, only: [:create, :destroy, :new]
     resources :ratings, only: [:index]

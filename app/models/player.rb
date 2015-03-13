@@ -1,7 +1,11 @@
 class Player < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :rememberable, :trackable
+
   has_many :ratings, dependent: :destroy do
     def find_or_create(game)
-      where(game_id: game.id).first || create({game: game, pro: false}.merge(game.rater.default_attributes))
+      where(game: game).first || create({game: game, pro: false}.merge(game.rater.default_attributes))
     end
   end
 
@@ -28,13 +32,13 @@ class Player < ActiveRecord::Base
     results.each { |result| result.destroy }
   end
 
-  validates :name, uniqueness: true, presence: true
-  validates :email, allow_blank: true, format: /@/
+  validates :username, allow_blank: false, uniqueness: true, presence: true
 
   def as_json
     {
       name: name,
-      email: email
+      email: email,
+      username: username
     }
   end
 
@@ -46,4 +50,8 @@ class Player < ActiveRecord::Base
     rating = ratings.where(game_id: game.id).first
     rating.rewind!
   end
+
+  # Hold over to satisfy devise's :database_authenticatable
+  def encrypted_password; end
+  def encrypted_password=(val); end
 end

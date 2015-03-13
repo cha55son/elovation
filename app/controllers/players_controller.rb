@@ -1,26 +1,7 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:edit, :destroy, :show, :update]
-
-  def create
-    @player = Player.new(player_params)
-
-    if @player.save
-      redirect_to dashboard_path
-    else
-      render :new
-    end
-  end
-
-  def destroy
-    @player.destroy if @player.results.empty?
-    redirect_to dashboard_path
-  end
+  before_action :set_player, only: [:edit, :show, :update]
 
   def edit
-  end
-
-  def new
-    @player = Player.new
   end
 
   def show
