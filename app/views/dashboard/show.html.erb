@@ -1,7 +1,7 @@
 <div class="row-fluid">
 
 	<div class='span8'>
-		<h1>Elovation Games</h1>
+		<h2>Games</h2>
 		<%= link_to "New Game", new_game_path, class: "btn btn-primary" %>
 
 		<ul id='games-list'>
@@ -48,7 +48,6 @@
 	<div class='span4'>
 		<div class='well'>
 			<h2>Players</h2>
-			<%= link_to "New Player", new_player_path, class: "btn" %>
 
 			<ul id='players-list'>
 				<% Player.all.sort_by(&:name).each do |player| %>

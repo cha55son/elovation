@@ -18,6 +18,11 @@
         <div class='brand-name'>Elovation</div>
         <div class='brand-label'>Home</div>
       <% end %>
+      <% if signed_in? %>
+          <div style="float: right">
+            <%= link_to 'Sign out', destroy_player_session_path, :method => :delete %>
+          </div>
+      <% end %>
     </header>
 
     <div id='main'>
