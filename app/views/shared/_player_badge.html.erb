@@ -1,10 +1,20 @@
 <%
-    # @param Player player The player to show the badge for.
-    # @param Hash options Additional options.
+  # @param Player player          The player to show the badge for.
+  # @param Hash   html_options    Additional options.
+  # @param Fixnum img_size        The pixel size of the gravatar image. 
+  # @param Bool   list_group_item Use true if used in list-group.
+  html_options = { class: '' } if html_options.nil?  
+  html_options[:class] += ' player-badge'
+  img_size = 24 if img_size.nil?
+  list_group_item = false if list_group_item.nil?
 %>
-<div class="player-badge">
-    <%= link_to player_path(player) do %>
-        <%= image_tag(gravatar_url(player)) %>
-    <% end %>
-    <%= link_to player.name, player_path(player), class: 'name' %>
-</div>
+<%= link_to player_path(player), html_options do %>
+  <% if list_group_item %>
+    <h4 class="list-group-item-heading">
+  <% end %>
+    <%= image_tag(gravatar_url(player), size: img_size.to_s) %>
+    <span class="name"><%= player.name %></span>
+  <% if list_group_item %>
+    </h4>
+  <% end %>
+<% end %>

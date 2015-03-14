@@ -11,29 +11,31 @@
                             <h3 class="game-title">
                                 <%= link_to game.name, game_path(game) %>
                             </h3>
-                            <% result = game.recent_results.limit(1).first %>
-                            <% if result %>
-                                <div class="recent-result">
-                                    <h4>Last game</h4>
-                                    <div class="description">
-                                        <% result.teams.each_with_index do |team, i| %>
-                                            <% team.players.each do |p| %>
-                                                <%= render partial: 'shared/player_badge', locals: { player: p } %>
+                            <% results = game.recent_results.limit(3) %>
+                            <div class="recent-results">
+                                <% if results.length > 0 %>
+                                    <% results.each do |result| %>
+                                        <div class="recent-result">
+                                            <% result.teams.each_with_index do |team, i| %>
+                                                <% team.players.each do |p| %>
+                                                    <%= render partial: 'shared/player_badge', locals: { player: p } %>
+                                                <% end %>
+                                                <% if i == 0 %>
+                                                    defeated
+                                                <% end %>
                                             <% end %>
-                                            <% if i == 0 %>
-                                                defeated
-                                            <% end %>
-                                        <% end %>
-                                        <time><%= format_time(result.created_at) %></time>
+                                            <time><%= format_time(result.created_at) %></time>
+                                        </div>
+                                    <% end %>
+                                <% else %>
+                                    <div class="recent-result inactive center">
+                                        There are no games at the moment.
                                     </div>
-                                </div>
-                            <% else %>
-                                <div class="inactive center">
-                                    There are no games at the moment.
-                                </div>
-                            <% end %>
+                                <% end %>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="hidden-xs col-sm-4">
+                            <h3 class="game-title">Rules</h3>
                             <ul class="game-params">
                                 <li class="rating-type"><%= game.rating_type %> – <%= game.allow_ties ? 'Ties allowed' : 'No ties' %></li>
                                 <li class="num-players"><%= game.players.length %> players</li>
@@ -47,11 +49,16 @@
 	</div>
 	<div class="col-sm-4">
         <h1 class="page-header">Players</h1>
-        <div class="list-group">
+        <div class="list-group player-list-group">
             <% Player.all.sort_by(&:name).each do |player| %>
-                <li class="list-group-item player-list-group-item">
-                    <%= render partial: 'shared/player_badge', locals: { player: player } %>
-                </li>
+                <%= render partial: 'shared/player_badge', locals: { 
+                    player: player,
+                    html_options: {
+                        class: 'list-group-item player-list-group-item'
+                    },
+                    img_size: 32,
+                    list_group_item: true
+                } %>
             <% end %>
         </div>
     </div>

@@ -1,5 +1,7 @@
 Elovation::Application.routes.draw do
-  devise_for :players
+  devise_for :players, controllers: {
+    sessions: 'players/sessions'
+  }
 
   resources :games do
     resources :results, only: [:create, :destroy, :new]

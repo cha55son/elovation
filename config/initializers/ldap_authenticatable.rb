@@ -37,7 +37,7 @@ module Devise
       end
 
       def username
-        params[:player][:username]
+        params[:player][:username].downcase
       end
 
       def password

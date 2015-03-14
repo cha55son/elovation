@@ -2,14 +2,17 @@ class Player < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable
+  before_validation :downcase_username
+  before_destroy :destroy_results
+  has_and_belongs_to_many :teams
+  validates :username, allow_blank: false, presence: true
+  validates_uniqueness_of :username, case_sensitive: false
 
   has_many :ratings, dependent: :destroy do
     def find_or_create(game)
       where(game: game).first || create({game: game, pro: false}.merge(game.rater.default_attributes))
     end
   end
-
-  has_and_belongs_to_many :teams
 
   has_many :results, through: :teams do
     def against(opponent)
@@ -28,11 +31,17 @@ class Player < ActiveRecord::Base
     end
   end
 
-  before_destroy do
-    results.each { |result| result.destroy }
+  def downcase_username
+    self.username = self.username.downcase
   end
 
-  validates :username, allow_blank: false, uniqueness: true, presence: true
+  def self.find_by_username(username)
+      find(:all, :conditions => ["username = lower(?)", username]) 
+  end
+
+  def detroy_results
+    results.each { |result| result.destroy }
+  end
 
   def as_json
     {
