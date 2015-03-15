@@ -11,6 +11,25 @@
 
                 .game-title {
                     margin-top: 0;
+                    
+                    .motion-indicator {
+                        display: inline-block;
+                        margin: auto;
+                        height: 16px;
+                        width: 16px;
+                        background-color: #888;
+                        border-radius: 16px;
+
+                        &.active {
+                            background-color: #F00;
+                        }
+                        &.inactive {
+                            background-color: #0F0;
+                        }
+                    }
+                    .motion-status {
+                        font-size: 12px;
+                    }
                 }
                 .game-params {
                     list-style-type: none;

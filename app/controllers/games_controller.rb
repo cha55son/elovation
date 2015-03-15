@@ -2,7 +2,9 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:motion, :destroy, :edit, :show, :update]
 
   def motion
-
+    @game.motion_active_at = Time.now
+    @game.save!
+    render text: 'success'
   end
 
   def create
@@ -60,6 +62,9 @@ class GamesController < ApplicationController
                                 :max_number_of_teams,
                                 :min_number_of_players_per_team,
                                 :max_number_of_players_per_team,
-                                :allow_ties)
+                                :allow_ties,
+                                :stream_url,
+                                :motion_detected_title,
+                                :motion_absent_title)
   end
 end

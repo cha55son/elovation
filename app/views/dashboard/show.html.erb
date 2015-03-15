@@ -5,11 +5,15 @@
         </h1>
 		<ul class="games-list">
             <% Game.all.sort_by(&:name).each do |game| %>
-                <li class="<%= "active" if @game == game %> games-list-item well well-sm">
+                <li class="<%= "active" if @game == game %> games-list-item well well-sm clearfix">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h3 class="game-title">
+                            <h3 class="game-title clearfix">
                                 <%= link_to game.name, game_path(game) %>
+                                <div class="motion-indicator <%= game.motion_active_at.nil? ? 'inactive' : 'active' %>"></div>
+                                <span class="motion-status <%= game.motion_active_at.nil? ? 'inactive' : 'active' %>">
+                                    <%= game.motion_active_at.nil? ? game.motion_absent_title : game.motion_detected_title %> 
+                                </span>
                             </h3>
                             <% results = game.recent_results.limit(3) %>
                             <div class="recent-results">
