@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310031518) do
+ActiveRecord::Schema.define(version: 20150315175550) do
 
   create_table "games", force: true do |t|
     t.string   "name",                           null: false
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20150310031518) do
     t.integer  "min_number_of_players_per_team"
     t.integer  "max_number_of_players_per_team"
     t.boolean  "allow_ties"
+    t.string   "stream_url"
+    t.string   "motion_detected_title"
+    t.string   "motion_absent_title"
   end
 
   create_table "players", force: true do |t|

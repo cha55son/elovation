@@ -1,50 +1,72 @@
 <%= form_for @game, html: {class: "form-horizontal"} do |f| %>
-  <%= f.error_messages %>
-  <%= f.hidden_field :min_number_of_players_per_team, value: 1, class: "input-mini" %>
-  <%= f.hidden_field :min_number_of_teams, value: 2, class: "input-mini" %>
-
-  <h1>New Game</h1>
-
-  <div class="control-group">
-    <%= f.label :name, class: "control-label" %>
-    <div class="controls">
-      <%= f.text_field :name, class: "input-xlarge" %>
+    <%= f.error_messages %>
+    <%= f.hidden_field :min_number_of_players_per_team, value: 1, class: "input-mini" %>
+    <%= f.hidden_field :min_number_of_teams, value: 2, class: "input-mini" %>
+    <div class="form-group">
+        <%= f.label :name, class: 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+        </div>
     </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :rating_type, class: "control-label" %>
-    <div class="controls">
-      <%= f.select :rating_type, Game::RATER_MAPPINGS.map{|k, v| [v.description, k]}, {}, class: "input-xlarge" %>
+    <div class="form-group">
+        <%= f.label :rating_type, class: 'col-sm-3 control-label' %>
+        <div class="col-sm-9">
+            <%= f.select :rating_type, Game::RATER_MAPPINGS.map{|k, v| [v.description, k]}, {}, class: 'form-control' %>
+        </div>
     </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :max_number_of_players_per_team, 'Maximum number of players per team', class: "control-label" %>
-    <div class="controls">
-      <%= f.number_field :max_number_of_players_per_team, class: "input-mini" %>
-      <span class="help-inline">Leave blank for no restriction</span>
+    <div class="form-group">
+        <%= f.label :max_number_of_players_per_team, 'Maximum number of players per team', class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <%= f.number_field :max_number_of_players_per_team, class: "form-control" %>
+            <p class="help-block">Leave blank for no restriction</p>
+        </div>
     </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :max_number_of_teams, 'Maximum number of teams', class: "control-label" %>
-    <div class="controls">
-      <%= f.number_field :max_number_of_teams, class: "input-mini" %>
-      <span class="help-inline">Leave blank for no restriction</span>
+    <div class="form-group">
+        <%= f.label :max_number_of_teams, 'Maximum number of teams', class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <%= f.number_field :max_number_of_teams, class: "form-control" %>
+            <p class="help-block">Leave blank for no restriction</p>
+        </div>
     </div>
-  </div>
-
-  <div class="control-group">
-    <div class="controls">
-      <%= f.check_box :allow_ties, class: "input-mini" %>
-      <%= f.label :allow_ties, class: "control-label" %>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-6">
+            <div class="checkbox">
+                <label>
+                    <%= f.check_box :allow_ties %> 
+                    Allow ties?
+                </label>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit class: "btn btn-primary" %>
-    <%= link_to "Cancel", root_path, class: "btn btn-warning" %>
-  </div>
-
+    <div class="form-group">
+        <%= f.label :stream_url, 'Streaming URL', class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <%= f.text_field :stream_url, class: "form-control" %>
+            <p class="help-block">An HTML5 compatible video stream. (OGG recommended)</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :motion_detected_title, 'Motion Detected Title', class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <%= f.text_field :motion_detected_title, class: "form-control" %>
+            <p class="help-block">
+                Displayed when the route <strong><%= motion_game_path(@game) %></strong> is hit.
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :motion_absent_title, 'Motion Absent Title', class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <%= f.text_field :motion_absent_title, class: "form-control" %>
+            <p class="help-block">
+                Displayed when the route <strong><%= motion_game_path(@game) %></strong> isn't hit in over 30 seconds.
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-6">
+            <%= f.submit class: "btn btn-primary" %>
+            <%= link_to "Cancel", root_path, class: "btn btn-default" %>
+        </div>
+    </div>
 <% end %>

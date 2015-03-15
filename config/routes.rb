@@ -6,6 +6,7 @@ Elovation::Application.routes.draw do
   resources :games do
     resources :results, only: [:create, :destroy, :new]
     resources :ratings, only: [:index]
+    get :motion, on: :member
   end
 
   resources :players do
