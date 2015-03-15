@@ -50,7 +50,7 @@
         <div class="col-sm-9">
             <%= f.text_field :motion_detected_title, class: "form-control" %>
             <p class="help-block">
-                Displayed when the route <strong><%= motion_game_path(@game) %></strong> is hit.
+                Displayed when the route <strong><%= motion_game_path(@game.id ? @game.id : ':id') %></strong> is hit.
             </p>
         </div>
     </div>
@@ -59,7 +59,7 @@
         <div class="col-sm-9">
             <%= f.text_field :motion_absent_title, class: "form-control" %>
             <p class="help-block">
-                Displayed when the route <strong><%= motion_game_path(@game) %></strong> isn't hit in over 30 seconds.
+                Displayed when the route <strong><%= motion_game_path(@game.id ? @game.id : ':id') %></strong> isn't hit in over 30 seconds.
             </p>
         </div>
     </div>

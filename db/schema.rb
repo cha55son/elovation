@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150315175550) do
     t.string   "stream_url"
     t.string   "motion_detected_title"
     t.string   "motion_absent_title"
+    t.datetime "motion_active_at"
   end
 
   create_table "players", force: true do |t|

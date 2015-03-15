@@ -1,5 +1,9 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:destroy, :edit, :show, :update]
+  before_action :set_game, only: [:motion, :destroy, :edit, :show, :update]
+
+  def motion
+
+  end
 
   def create
     @game = Game.new(games_params)

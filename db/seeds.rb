@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+(1..5).each do |i|
+    Players.create(username: "test#{i}", name: "Test User #{i}", email: "test#{i}@example.com")
+end
