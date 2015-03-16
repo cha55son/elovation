@@ -1,0 +1,12 @@
+<%
+    # @param Game game
+    is_active = !game.motion_active_at.nil?
+    absent_title_empty = game.motion_absent_title && game.motion_absent_title.empty?
+    detected_title_empty = game.motion_detected_title && game.motion_detected_title.empty?
+%>
+<% unless absent_title_empty || detected_title_empty %>
+    <div class="game-status-indicator <%= is_active ? 'active' : 'inactive' %>"></div>
+    <span class="game-status <%= is_active ? 'active' : 'inactive' %>">
+        <%= is_active ? game.motion_detected_title : game.motion_absent_title %> 
+    </span>
+<% end %>

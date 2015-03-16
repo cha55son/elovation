@@ -8,11 +8,33 @@
     display: inline;
     margin-left: 5px;
     margin-right: 3px;
+    text-decoration: none !important;
 
+    &:hover {
+        text-decoration: underline !important;
+    }
     img {
         margin-right: 5px;
         border-radius: 100px;
     }
+}
+.game-status-indicator {
+    display: inline-block;
+    margin: auto;
+    height: 16px;
+    width: 16px;
+    background-color: #888;
+    border-radius: 16px;
+
+    &.active {
+        background-color: #F00;
+    }
+    &.inactive {
+        background-color: #0F0;
+    }
+}
+.game-status {
+    font-size: 50%;
 }
 /* Devise alert styles */
 .alert-error {

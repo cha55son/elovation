@@ -10,10 +10,7 @@
                         <div class="col-sm-8">
                             <h3 class="game-title clearfix">
                                 <%= link_to game.name, game_path(game) %>
-                                <div class="motion-indicator <%= game.motion_active_at.nil? ? 'inactive' : 'active' %>"></div>
-                                <span class="motion-status <%= game.motion_active_at.nil? ? 'inactive' : 'active' %>">
-                                    <%= game.motion_active_at.nil? ? game.motion_absent_title : game.motion_detected_title %> 
-                                </span>
+                                <%= render partial: 'shared/game_status', locals: { game: game } %>
                             </h3>
                             <% results = game.recent_results.limit(3) %>
                             <div class="recent-results">
