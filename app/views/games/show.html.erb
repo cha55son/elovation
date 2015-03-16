@@ -6,7 +6,7 @@
         <div class="actions pull-right">
             <%= link_to 'Edit', edit_game_path(@game), class: "btn btn-primary" %>
             <% if @game.results.empty? %>
-                <%= link_to "Delete", game_path(@game), method: :delete, confirm: "Are you sure?", class: "btn btn-danger" %>
+                <%= link_to "Delete", game_path(@game), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
             <% end %>
         </div>
     </h1>

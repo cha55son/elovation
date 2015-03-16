@@ -16,6 +16,6 @@
     <% end %>
     <time><%= format_time(result.created_at) %></time>
     <% if result.most_recent? -%>
-        <%= link_to "Delete", game_result_path(result.game, result), class: "btn btn-danger btn-xs", method: :delete, confirm: "Are you sure?" %>
+        <%= link_to "Delete", game_result_path(result.game, result), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "Are you sure?" } %>
     <% end -%>
 </div>
