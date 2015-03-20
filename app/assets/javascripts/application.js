@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require lumen/loader
 //= require lumen/bootswatch
 //= require chosen.min
 
+Turbolinks.enableTransitionCache();
+Turbolinks.enableProgressBar();

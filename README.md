@@ -6,6 +6,8 @@ This supports individual player rankings within multi-player teams, using the [T
 Development
 ---------------------------
 
+ * Edit the ldap.yml and database.yml 
+
 To start the app run:
 
 ```

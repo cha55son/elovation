@@ -19,7 +19,7 @@
             <% if @game.recent_results.any? %>
                 <%= render partial: 'shared/results', object: @game.recent_results, locals: { show_game: false } %>
             <% else %>
-                <div class="inactive center">
+                <div class="well center">
                     No results, play some games!
                 </div>
             <% end %>
