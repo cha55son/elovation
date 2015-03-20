@@ -1,3 +1,12 @@
-<ol id='results'>
-  <%= render partial: 'shared/result', collection: results, locals: {show_game: show_game} %>
-</ol>
+<%
+    show_game = true if show_game.nil?
+%>
+<table class="table table-striped">
+    <% results.each do |result| %>
+        <tr>
+            <td>
+                <%= render partial: 'shared/result', object: result, locals: { show_game: show_game } %>
+            </td>
+        </tr>
+    <% end %>
+</table>
