@@ -1,9 +1,6 @@
 <tr>
     <td>
-        <%= render partial: 'shared/player_badge', locals: {
-            player: rating.player,
-            link: player_game_path(rating.player, @game)
-        } %>
+        <%= player_badge(rating.player, link: player_game_path(rating.player, @game)) %>
     </td>
     <td><%= rating.value %></td>
     <td><%= rating.player.results.for_game(rating.game).wins.size %></td>

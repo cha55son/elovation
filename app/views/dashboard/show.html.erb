@@ -15,22 +15,10 @@
                             <% results = game.recent_results.limit(3) %>
                             <div class="recent-results">
                                 <% if results.length > 0 %>
-                                    <% results.each do |result| %>
-                                        <div class="recent-result">
-                                            <% result.teams.each_with_index do |team, i| %>
-                                                <% team.players.each do |p| %>
-                                                    <%= render partial: 'shared/player_badge', locals: { player: p } %>
-                                                <% end %>
-                                                <% if i == 0 %>
-                                                    defeated
-                                                <% end %>
-                                            <% end %>
-                                            <time><%= format_time(result.created_at) %></time>
-                                        </div>
-                                    <% end %>
+                                    <%= render partial: 'shared/results', object: results, locals: { show_game: false } %>
                                 <% else %>
                                     <div class="recent-result inactive center">
-                                        There are no games at the moment.
+                                        No results, play some games!
                                     </div>
                                 <% end %>
                             </div>
@@ -52,14 +40,9 @@
         <h1 class="page-header">Players</h1>
         <div class="list-group player-list-group">
             <% Player.all.sort_by(&:name).each do |player| %>
-                <%= render partial: 'shared/player_badge', locals: { 
-                    player: player,
-                    html_options: {
-                        class: 'list-group-item player-list-group-item'
-                    },
-                    img_size: 32,
-                    list_group_item: true
-                } %>
+                <%= player_badge(player, img_size: 32, html_options: {
+                    class: 'list-group-item player-list-group-item'
+                }) %>
             <% end %>
         </div>
     </div>

@@ -1,20 +1,16 @@
 <div class="<%= 'new' if result.most_recent? -%>">
     <% result.teams.each_with_index do |team, i| %>
         <% team.players.each do |winner| %>
-            <%= render partial: 'shared/player_badge', locals: { 
-                player: winner,
-                link: player_game_path(winner, @game)
-            } %>
+            <%= player_badge(winner) %>
         <% end %>
         <% if i == 0 %>
             <%= result.tie? ? 'ties' : 'defeats' %>
         <% end %>
     <% end %>
     <% if show_game %>
-        in
-        <strong><%= link_to result.game.name, result.game %></strong>
+        in <%= link_to result.game.name, result.game %>
     <% end %>
-    <time><%= format_time(result.created_at) %></time>
+    <%= format_time(result.created_at) %>
     <% if result.most_recent? -%>
         <%= link_to "Delete", game_result_path(result.game, result), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "Are you sure?" } %>
     <% end -%>
