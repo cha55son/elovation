@@ -1,21 +1,22 @@
-<h1><%= @game.name %></h1>
-
-<div class="row-fluid">
-  <div class="span6">
-    <h2>All Ratings</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Rating</th>
-          <th><abbr title='Wins'>W</abbr></th>
-          <th><abbr title='Losses'>L</abbr></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <%= render partial: 'games/rating', collection: @game.all_ratings %>
-      </tbody>
-    </table>
-  </div>
+<div class="ratings-page ratings-page-index">
+    <h1 class="page-header">
+        <%= link_to @game.name, game_path(@game) %> / All Ratings
+    </h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Rating</th>
+                        <th><abbr title='Wins'>W</abbr></th>
+                        <th><abbr title='Losses'>L</abbr></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: 'games/rating', collection: @game.all_ratings %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

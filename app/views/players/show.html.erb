@@ -8,16 +8,22 @@
             <% if @player.recent_results.any? %>
                 <%= render partial: 'shared/results', object: @player.recent_results %>
             <% else %>
-                <div class="inactive center">
+                <div class="no-results well center">
                     No results, play some games!
                 </div>
             <% end %>
         </div>
         <div class="col-sm-4">
             <h3>Ratings</h3>
-            <div class="list-group">
-                <%= render partial: 'rating', collection: @player.ratings %>
-            </div>
+            <% if @player.ratings.length > 0 %>
+                <div class="list-group">
+                    <%= render partial: 'rating', collection: @player.ratings %>
+                </div>
+            <% else %>
+                <div class="no-results well center">
+                    Argh! There are no ratings.
+                </div>
+            <% end %>
         </div>
     </div>
 </div>

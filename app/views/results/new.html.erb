@@ -1,26 +1,46 @@
 <div class="results-page results-page-new">
+    <script type="text/javascript">
+        var maxNumberOfPlayersPerTeam = <%= @game.max_number_of_players_per_team %>;
+        var gameAllowsTies = <%= @game.allow_ties %>;
+        var players = <%= raw player_options.to_json %>;
+    </script>
     <h1 class="page-header">
         <%= link_to @game.name, game_path(@game) %> / Add Result
     </h1>
-    <%= form_for [@game, @result], html: {id: "form-results"} do |f| %>
-        <%= f.error_messages %>
-        <% @result.teams.each.with_index do |team, index| %>
-            <%= select "result[teams][#{index}]", "players", player_options, {include_blank: ''}, 
-                class: "players", multiple: @game.max_number_of_players_per_team != 1, "data-placeholder" => "Team #{index + 1}" %>
-            <% if index != @result.teams.size - 1 %>
-                <% if @game.allow_ties %>
-                    <%= select "result[teams][#{index}]", :relation, ["defeats", "ties"], {} %>
-                <% else %>
-                    <%= hidden_field_tag "result[teams][#{index}][relation]", :defeats, {} %>
-                    Defeats:
-                <% end %>
-            <% end %>
-        <% end %>
-        <div class='form-actions'>
-            <%= f.submit class: "btn btn-primary", value: 'Save Result' %>
+    <%= form_for [@game, @result] do |f| %>
+        <%= render partial: 'shared/errors', object: @result %>
+        <div class="form-group">
+            <div class="col-xs-7">
+                <div class="row">
+                    <div class="col-xs-9">
+                        <label class="pull-right"><strong>Team One</strong></label>
+                        <%= select "result[teams][0]", "players", player_options, { include_blank: '' }, 
+                            class: "players chosen-select chosen-rtl", multiple: @game.max_number_of_players_per_team != 1, 
+                            "data-placeholder" => "Select team members..." %>
+                    </div>
+                    <div class="col-xs-3 center" style="padding-top: 8px">
+                        <label style="display: block">&nbsp;</label>
+                        <% if @game.allow_ties %>
+                            <%= select "result[teams][0]", :relation, ["defeated", "tied"], {} %>
+                        <% else %>
+                            <%= hidden_field_tag "result[teams][0][relation]", :defeated, {} %>
+                            Defeated:
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <label><strong>Team Two</strong></label>
+                <%= select "result[teams][1]", "players", player_options, { include_blank: '' }, 
+                    class: "players chosen-select", multiple: @game.max_number_of_players_per_team != 1, 
+                    "data-placeholder" => "Select team members..." %>
+            </div>
         </div>
-    <% end %>
-    <%= javascript_tag do %>
-        $(".players").chosen();
+        <div class="form-group">
+            <div class="col-xs-12" style="margin-top: 20px">
+                <%= f.submit class: "btn btn-primary", value: 'Save Result' %>
+                <%= link_to "Cancel", :back, class: "btn btn-default" %>
+            </div>
+        </div>
     <% end %>
 </div>

@@ -48,6 +48,37 @@
 .game-status {
     font-size: 50%;
 }
+.result-wrapper {
+    position: relative;
+
+    &.has-team {
+
+        .team, .outcome {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .team {
+            text-align: left;
+
+            .player-badge {
+                display: block;
+                margin-bottom: 3px;
+            }
+        }
+        .occurred {
+            white-space: nowrap;
+        }
+    }
+    .team, .outcome {
+        display: inline;
+    }
+    .outcome {
+        background-color: #DDD;
+        padding: 0px 5px;
+        color: #FFF;
+        border-radius: 2px;
+    }
+}
 /* Devise alert styles */
 .alert-error {
     background-color: #f2dede;

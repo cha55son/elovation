@@ -6,6 +6,7 @@ gem 'sqlite3', '~> 1.3.10'
 gem 'devise', '~> 3.4.1'
 gem 'net-ldap', '~> 0.11'
 gem 'twitter-bootswatch-rails', '~> 3.3.2'
+gem 'twitter-bootswatch-rails-fontawesome', '~> 4.3'
 gem 'therubyracer', '~> 0.12.1'
 gem 'turbolinks'
 

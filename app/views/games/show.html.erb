@@ -19,27 +19,33 @@
             <% if @game.recent_results.any? %>
                 <%= render partial: 'shared/results', object: @game.recent_results, locals: { show_game: false } %>
             <% else %>
-                <div class="well center">
+                <div class="no-results well center">
                     No results, play some games!
                 </div>
             <% end %>
         </div>
         <div class="col-sm-4">
             <h3>Player Ratings</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Player</th>
-                        <th>Rating</th>
-                        <th>W</th>
-                        <th>L</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%= render partial: 'rating', collection: @game.all_ratings.select(&:active?) %>
-                </tbody>
-            </table>
-            <%= link_to "View All", game_ratings_path(@game), class: 'btn btn-default', style: 'width: 100%' %>
+            <% if @ratings.length > 0 %>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Rating</th>
+                            <th>W</th>
+                            <th>L</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%= render partial: 'rating', collection: @ratings %>
+                    </tbody>
+                </table>
+                <%= link_to "View All", game_ratings_path(@game), class: 'btn btn-default', style: 'width: 100%' %>
+            <% else %>
+                <div class="no-results well center">
+                    Argh! There are no ratings.
+                </div>
+            <% end %>
         </div>
     </div>
 </div>

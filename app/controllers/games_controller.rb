@@ -33,12 +33,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json do
-        render json: @game
-      end
-    end
+    @ratings = @game.all_ratings.select(&:active?)
   end
 
   def update

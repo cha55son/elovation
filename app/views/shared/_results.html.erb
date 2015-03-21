@@ -3,10 +3,6 @@
 %>
 <table class="table table-striped">
     <% results.each do |result| %>
-        <tr>
-            <td>
-                <%= render partial: 'shared/result', object: result, locals: { show_game: show_game } %>
-            </td>
-        </tr>
+        <%= render partial: 'shared/result', object: result, locals: { show_game: show_game } %>
     <% end %>
 </table>

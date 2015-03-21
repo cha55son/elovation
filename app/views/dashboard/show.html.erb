@@ -12,7 +12,7 @@
                                 <%= link_to game.name, game_path(game) %>
                                 <%= render partial: 'shared/game_status', locals: { game: game } %>
                             </h3>
-                            <% results = game.recent_results.limit(3) %>
+                            <% results = game.recent_results.limit(1) %>
                             <% if results.length > 0 %>
                                 <div class="recent-results">
                                     <%= render partial: 'shared/results', object: results, locals: { show_game: false } %>
