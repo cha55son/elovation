@@ -3,6 +3,9 @@
         <%= link_to 'Games', dashboard_path %> /
         <%= @game.name %>
         <%= render partial: 'shared/game_status', locals: { game: @game } %>
+        <% unless @game.stream_url.empty? %>
+            <a href=#" class="stream-icon" title="View the live stream"><i class="fa fa-video-camera"></i></a>
+        <% end %>
         <div class="actions pull-right">
             <%= link_to 'Edit', edit_game_path(@game), class: "btn btn-primary" %>
             <% if @game.results.empty? %>

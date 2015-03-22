@@ -1,9 +1,22 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:motion, :destroy, :edit, :show, :update]
+  skip_before_action :authenticate_player!, only: [:motion, :motion_clear]
 
   def motion
     @game.motion_active_at = Time.now
     @game.save!
+    render text: 'success'
+  end
+
+  def motion_clear
+    seconds = 30
+    Rails.logger.info "Clearing games with motion greater than #{seconds} seconds..."
+    Game.all.find_each do |game|
+      next if game.motion_active_at.nil?
+      game.motion_active_at = nil if (Time.new - game.motion_active_at) >= seconds
+      game.save
+    end
+    Rails.logger.info "Finished clearing games."
     render text: 'success'
   end
 
