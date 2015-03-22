@@ -7,6 +7,7 @@ class Player < ActiveRecord::Base
   has_and_belongs_to_many :teams
   validates :username, allow_blank: false, presence: true
   validates_uniqueness_of :username, case_sensitive: false
+  has_many :games
 
   has_many :ratings, dependent: :destroy do
     def find_or_create(game)

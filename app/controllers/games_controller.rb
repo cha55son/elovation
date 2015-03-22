@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:motion, :destroy, :edit, :show, :update]
   skip_before_action :authenticate_player!, only: [:motion, :motion_clear]
+  before_action :set_game, only: [:motion, :destroy, :edit, :show, :update]
+  before_action :can_edit?, only: [:edit, :update, :destroy]
 
   def motion
     @game.motion_active_at = Time.now
@@ -22,6 +23,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(games_params)
+    @game.player_id = current_player.id
 
     if @game.save
       redirect_to game_path(@game)
@@ -63,6 +65,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def can_edit?
+    redirect_to game_path(@game) unless @game.can_edit?(current_player)
+  end
+
   def games_params
     params.require(:game).permit(:name,
                                 :rating_type,
@@ -73,6 +79,7 @@ class GamesController < ApplicationController
                                 :allow_ties,
                                 :stream_url,
                                 :motion_detected_title,
-                                :motion_absent_title)
+                                :motion_absent_title,
+                                :player_id)
   end
 end

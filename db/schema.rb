@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315175550) do
+ActiveRecord::Schema.define(version: 20150322170109) do
 
   create_table "games", force: true do |t|
     t.string   "name",                           null: false
@@ -27,20 +27,24 @@ ActiveRecord::Schema.define(version: 20150315175550) do
     t.string   "motion_detected_title"
     t.string   "motion_absent_title"
     t.datetime "motion_active_at"
+    t.integer  "player_id"
   end
 
+  add_index "games", ["player_id"], name: "index_games_on_player_id"
+
   create_table "players", force: true do |t|
-    t.string   "name",                             null: false
+    t.string   "name",                                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
-    t.string   "username",            default: "", null: false
+    t.string   "username",            default: "",    null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       default: 0,  null: false
+    t.integer  "sign_in_count",       default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.boolean  "is_admin",            default: false, null: false
   end
 
   add_index "players", ["username"], name: "index_players_on_username", unique: true

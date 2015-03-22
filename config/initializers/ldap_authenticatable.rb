@@ -30,8 +30,12 @@ module Devise
           player = Player.find_by(username: username)
           # Create the player if it doesn't exist
           player = Player.create(username: username, name: '...') unless player
-          player.email = ldap_user.mail[0] if ldap_user.mail.length > 0
-          player.name = ldap_user.cn[0] if ldap_user.cn.length > 0
+          if ldap_user.respond_to?(:mail) && ldap_user.mail.length > 0
+            player.email = ldap_user.mail[0]
+          end
+          if ldap_user.respond_to?(:cn) && ldap_user.cn.length > 0
+            player.name = ldap_user.cn[0]
+          end
           success! player
         end
       end

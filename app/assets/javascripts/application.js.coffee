@@ -29,7 +29,6 @@ Turbolinks.enableProgressBar()
 #
 ready = (event) ->
     $body = $('body')
-    console.log 'Triggering: ' + event + '/' + $body.data('controller') + ':' + $body.data('action')
     $(document).trigger event + '/' + $body.data('controller') + ':' + $body.data('action')
 
 # May only be called once while a client views different pages

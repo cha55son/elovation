@@ -1,12 +1,14 @@
 class Game < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :results, dependent: :destroy
+  belongs_to :player
 
   RATER_MAPPINGS = {
     "elo" => Rater::EloRater.new,
     "trueskill" => Rater::TrueSkillRater.new
   }
 
+  validates :player_id, presence: true
   validates :name, presence: true
   validates :rating_type, inclusion: { in: RATER_MAPPINGS.keys, message: "must be a valid rating type" }
   validate do |game|
@@ -74,5 +76,9 @@ class Game < ActiveRecord::Base
     results.order("id ASC").all.each do |result|
       rater.update_ratings self, result.teams.order("rank ASC")
     end
+  end
+
+  def can_edit?(user)
+    user.is_admin == true || user.id == player_id
   end
 end

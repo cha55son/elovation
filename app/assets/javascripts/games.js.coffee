@@ -1,8 +1,10 @@
-init = ->
+initShow = ->
     $('.stream-icon').click (e) ->
         $('.stream').slideToggle()
         e.preventDefault()
 
-$(document).on 'page:ready/games:show', init
-$(document).on 'page:load/games:show', init
+initEdit = ->
+    $('.chosen-select').chosen()
 
+$(document).on 'page:ready/games:show page:load/games:show', initShow
+$(document).on 'page:ready/games:edit page:load/games:edit', initEdit

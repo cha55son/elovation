@@ -6,12 +6,14 @@
         <% unless @game.stream_url.empty? %>
             <a href=#" class="stream-icon" title="View the live stream"><i class="fa fa-video-camera"></i></a>
         <% end %>
-        <div class="actions pull-right">
-            <%= link_to 'Edit', edit_game_path(@game), class: "btn btn-primary" %>
-            <% if @game.results.empty? %>
-                <%= link_to "Delete", game_path(@game), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-            <% end %>
-        </div>
+        <% if @game.can_edit?(current_player) %>
+            <div class="actions pull-right">
+                <%= link_to 'Edit', edit_game_path(@game), class: "btn btn-primary" %>
+                <% if @game.results.empty? %>
+                    <%= link_to "Delete", game_path(@game), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                <% end %>
+            </div>
+        <% end %>
     </h1>
     <div class="row">
         <div class="col-xs-12">

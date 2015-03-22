@@ -2,6 +2,17 @@
     <%= render partial: 'shared/errors', object: @game %>
     <%= f.hidden_field :min_number_of_players_per_team, value: 1, class: "input-mini" %>
     <%= f.hidden_field :min_number_of_teams, value: 2, class: "input-mini" %>
+    <% if @game.player_id %>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Owner</label>
+            <div class="col-sm-9">
+                <%= f.select :player_id, player_options,
+                    { include_blank: false },
+                    { class: 'chosen-select' }
+                %>
+            </div>
+        </div>
+    <% end %>
     <div class="form-group">
         <%= f.label :name, class: 'col-sm-3 control-label' %>
         <div class="col-sm-9">
@@ -45,6 +56,7 @@
             <p class="help-block">
                 An HTML5 compatible video stream for the 
                 <a href="http://www.w3schools.com/html/html5_video.asp" target="_blank">&lt;video&gt;</a> tag.
+                Also supports MJPEG. <br> The url should end with the extension of the video type. (.mjpeg, .ogg, .webm)
             </p>
         </div>
     </div>

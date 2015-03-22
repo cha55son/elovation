@@ -9,4 +9,8 @@ module ApplicationHelper
   def format_time(time)
     "#{time_ago_in_words(time)} ago"
   end
+
+  def player_options
+    Player.order("name ASC").all.map { |player| [player.name, player.id] }
+  end
 end
