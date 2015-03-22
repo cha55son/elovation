@@ -4,26 +4,26 @@
             Games <%= link_to "New Game", new_game_path, class: "btn btn-sm btn-primary" %>
         </h1>
 		<ul class="games-list">
-            <% Game.all.sort_by(&:name).each do |game| %>
-                <li class="<%= "active" if @game == game %> games-list-item well well-sm clearfix">
+            <% @games.each do |game| %>
+                <li class="games-list-item clearfix">
                     <div class="row">
                         <div class="col-sm-8">
                             <h3 class="game-title clearfix">
                                 <%= link_to game.name, game_path(game) %>
                                 <%= render partial: 'shared/game_status', locals: { game: game } %>
                             </h3>
-                            <% results = game.recent_results.limit(3) %>
-                            <div class="recent-results">
-                                <% if results.length > 0 %>
+                            <% results = game.recent_results.limit(1) %>
+                            <% if results.length > 0 %>
+                                <div class="recent-results">
                                     <%= render partial: 'shared/results', object: results, locals: { show_game: false } %>
-                                <% else %>
-                                    <div class="recent-result inactive center">
-                                        No results, play some games!
-                                    </div>
-                                <% end %>
-                            </div>
+                                </div>
+                            <% else %>
+                                <div class="no-results well">
+                                    No results, play some games!
+                                </div>
+                            <% end %>
                         </div>
-                        <div class="hidden-xs col-sm-4">
+                        <div class="col-sm-4">
                             <h3 class="game-title">Rules</h3>
                             <ul class="game-params">
                                 <li class="rating-type"><%= game.rating_type %> – <%= game.allow_ties ? 'Ties allowed' : 'No ties' %></li>
@@ -35,6 +35,11 @@
                 </li>
             <% end %>
 		</ul>
+        <% if @games.length == 0 %>
+            <div class="no-results well">
+                There are no games at the moment.
+            </div>
+        <% end %>
 	</div>
 	<div class="col-sm-4">
         <h1 class="page-header">Players</h1>

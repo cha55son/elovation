@@ -1,17 +1,31 @@
-<div class="<%= 'new' if result.most_recent? -%>">
-    <% result.teams.each_with_index do |team, i| %>
-        <% team.players.each do |winner| %>
-            <%= player_badge(winner) %>
+<%
+    has_team = result.teams.any? { |team| team.players.length > 1 }
+    has_team = true if result.teams.length > 2
+%>
+<tr>
+    <td class="result-wrapper <%= has_team ? 'has-team' : '' %>">
+        <% outcome = nil %>
+        <% result.teams.each_with_index do |team, i| %>
+            <% unless outcome.nil? %>
+                <div class="outcome">
+                    <%= outcome ? 'tied' : 'defeated' %> <i class="fa fa-caret-right"></i></i>
+                </div>
+            <% end %>
+            <% outcome = result.tie? if i == 0 %>
+            <div class="team">
+                <% team.players.each_with_index do |p, j| %>
+                    <%= player_badge(p) %>
+                <% end %>
+            </div>
         <% end %>
-        <% if i == 0 %>
-            <%= result.tie? ? 'ties' : 'defeats' %>
-        <% end %>
-    <% end %>
-    <% if show_game %>
-        in <%= link_to result.game.name, result.game %>
-    <% end %>
-    <%= format_time(result.created_at) %>
-    <% if result.most_recent? -%>
-        <%= link_to "Delete", game_result_path(result.game, result), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "Are you sure?" } %>
-    <% end -%>
-</div>
+        <span class="occurred">
+            <%= format_time(result.created_at) %>
+            <% if show_game %>
+                in <%= link_to result.game.name, result.game %>
+            <% end %>
+            <% if result.most_recent? -%>
+                <%= link_to "Delete", game_result_path(result.game, result), class: "btn btn-danger btn-xs result-delete", method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end -%>
+        </span>
+    </td>
+</tr>

@@ -1,0 +1,11 @@
+<% if errors.errors.any? %>
+    <div class="alert alert-error alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong><%= errors.errors.count %></strong> errors prohibited this result from being saved
+        <ul>
+            <% errors.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

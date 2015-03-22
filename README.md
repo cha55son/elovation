@@ -1,20 +1,33 @@
 Elovation
 ===========================
 
-[![Build Status](https://travis-ci.org/drewolson/elovation.png?branch=master)](https://travis-ci.org/drewolson/elovation)
+![screenshot](http://i.imgur.com/j6jjxKa.png)
 
-At Braintree, we play ping pong in the office. We wanted a way to track results and assign ratings to players. Elovation was born. It's a simple rails app that tracks the results of any two player game and assigns ratings to the players using the [Elo rating system](http://en.wikipedia.org/wiki/Elo_rating_system).
+This supports individual player rankings within multi-player teams, using the [Trueskill ranking system](http://research.microsoft.com/en-us/projects/trueskill/).
 
-This also supports individual player rankings within multi-player teams, using the [Trueskill ranking system](http://research.microsoft.com/en-us/projects/trueskill/)
+###### Additional features
 
+* LDAP integration
+* Bootstrap 3 styling with [bootswatch lumen](https://bootswatch.com/lumen/).
+* Motion detection integration (It doesn't do the motion detection but you can setup [linux motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome) to hit certain routes that trigger the UI change.)
+* Coming soon: Given a stream url will display a live stream on a game page.
 
-Deployment
+Development
 ---------------------------
 
-Elovation is optimized for deployment on [Heroku](http://www.heroku.com). Because the app doesn't provide any authentication or authorization, you can turn on basic auth by setting some environment variables in your heroku app.
+ * Edit the ldap.yml and database.yml 
 
-`heroku config:add BASIC_AUTH=true BASIC_AUTH_USER=username BASIC_AUTH_PASSWORD=password`
+To start the app run:
 
-After pushing the app to heroku, just run the migrations and you're all set.
+```
+bundle install
+rake db:migrate
+rails s
+```
 
-`heroku run rake db:migrate`
+Production
+---------------------------
+
+```
+RAILS_ENV=production rails s
+```

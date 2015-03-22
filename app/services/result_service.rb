@@ -7,7 +7,7 @@ class ResultService
       players = Array.wrap(team[:players]).delete_if(&:blank?)
       acc << { rank: next_rank, players: players }
 
-      next_rank = next_rank + 1 if team[:relation] != "ties"
+      next_rank = next_rank + 1 if team[:relation] != "tied"
     end
 
     teams = teams.reverse.drop_while{ |team| team[:players].empty? }.reverse

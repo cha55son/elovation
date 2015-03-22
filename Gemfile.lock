@@ -175,10 +175,16 @@ GEM
     thread_safe (0.3.5)
     tilt (1.4.1)
     timecop (0.7.3)
+    turbolinks (2.5.3)
+      coffee-rails
     twitter-bootswatch-rails (3.3.2.0)
       execjs (~> 2.3)
       less-rails (~> 2.4)
       railties (>= 3.1, < 5.0)
+    twitter-bootswatch-rails-fontawesome (4.3.0.0)
+      less-rails (~> 2.4)
+      railties (>= 3.1, < 5.0)
+      twitter-bootswatch-rails (~> 3.3, >= 3.3.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -222,6 +228,8 @@ DEPENDENCIES
   therubyracer (~> 0.12.1)
   timecop
   trueskill!
+  turbolinks
   twitter-bootswatch-rails (~> 3.3.2)
+  twitter-bootswatch-rails-fontawesome (~> 4.3)
   uglifier
   unicorn

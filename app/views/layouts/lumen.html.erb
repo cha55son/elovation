@@ -14,15 +14,15 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application", :media => "all" %>
   </head>
-  <body>
-    <nav class="navbar navbar-default">
+  <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+    <nav class="global-navbar navbar navbar-default turbolinks-progress-bar">
         <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#elovation-main-nav">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <%= link_to 'Elovation', dashboard_path, class: 'navbar-brand' %>
         </div>
