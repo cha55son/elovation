@@ -1,7 +1,7 @@
 Elovation
 ===========================
 
-![screenshot](http://i.imgur.com/j6jjxKa.png)
+![screenshot](http://i.imgur.com/wpGWlsi.png)
 
 This supports individual player rankings within multi-player teams, using the [Trueskill ranking system](http://research.microsoft.com/en-us/projects/trueskill/).
 
