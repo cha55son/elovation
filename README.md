@@ -10,7 +10,7 @@ This supports individual player rankings within multi-player teams, using the [T
 * LDAP integration
 * Bootstrap 3 styling with [bootswatch lumen](https://bootswatch.com/lumen/).
 * Motion detection integration (It doesn't do the motion detection but you can setup [linux motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome) to hit certain routes that trigger the UI change.)
-* Coming soon: Given a stream url will display a live stream on a game page.
+* Given a stream url the app will display a live stream on a game page. (mjpeg and any <video> compat. file type)
 
 Development
 ---------------------------
