@@ -22,3 +22,4 @@ elovation_development
 
 config/ldap.yml.*
 public/assets
+secret.key
