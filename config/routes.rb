@@ -1,4 +1,4 @@
-Elovation::Application.routes.draw do
+Rails.application.routes.draw do
   devise_for :players, controllers: {
     sessions: 'players/sessions'
   }

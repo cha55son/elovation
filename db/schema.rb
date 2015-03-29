@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150322170109) do
 
-  create_table "games", force: true do |t|
+  create_table "games", force: :cascade do |t|
     t.string   "name",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150322170109) do
 
   add_index "games", ["player_id"], name: "index_games_on_player_id"
 
-  create_table "players", force: true do |t|
+  create_table "players", force: :cascade do |t|
     t.string   "name",                                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 20150322170109) do
 
   add_index "players", ["username"], name: "index_players_on_username", unique: true
 
-  create_table "players_teams", force: true do |t|
+  create_table "players_teams", force: :cascade do |t|
     t.integer "player_id"
     t.integer "team_id"
   end
 
-  create_table "rating_history_events", force: true do |t|
+  create_table "rating_history_events", force: :cascade do |t|
     t.integer  "rating_id",           null: false
     t.integer  "value",               null: false
     t.datetime "created_at"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20150322170109) do
 
   add_index "rating_history_events", ["rating_id"], name: "index_rating_history_events_on_rating_id"
 
-  create_table "ratings", force: true do |t|
+  create_table "ratings", force: :cascade do |t|
     t.integer  "player_id",           null: false
     t.integer  "game_id",             null: false
     t.integer  "value",               null: false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150322170109) do
   add_index "ratings", ["game_id"], name: "index_ratings_on_game_id"
   add_index "ratings", ["player_id"], name: "index_ratings_on_player_id"
 
-  create_table "results", force: true do |t|
+  create_table "results", force: :cascade do |t|
     t.integer  "game_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20150322170109) do
 
   add_index "results", ["game_id"], name: "index_results_on_game_id"
 
-  create_table "teams", force: true do |t|
+  create_table "teams", force: :cascade do |t|
     t.integer  "rank"
     t.integer  "result_id"
     t.datetime "created_at"

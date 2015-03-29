@@ -1,7 +1,11 @@
 <%= form_for @game, html: {class: "form-horizontal"} do |f| %>
-    <%= render partial: 'shared/errors', object: @game %>
     <%= f.hidden_field :min_number_of_players_per_team, value: 1, class: "input-mini" %>
     <%= f.hidden_field :min_number_of_teams, value: 2, class: "input-mini" %>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-9">
+            <%= render partial: 'shared/errors', object: @game %>
+        </div>
+    </div>
     <% if @game.player_id %>
         <div class="form-group">
             <label class="col-sm-3 control-label">Owner</label>
@@ -26,7 +30,7 @@
         </div>
     </div>
     <div class="form-group">
-        <%= f.label :max_number_of_players_per_team, 'Maximum number of players per team', class: "col-sm-3 control-label" %>
+        <%= f.label :max_number_of_players_per_team, 'Max players per team', class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
             <%= f.number_field :max_number_of_players_per_team, class: "form-control" %>
             <p class="help-block">Leave blank for no restriction</p>

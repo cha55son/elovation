@@ -11,7 +11,7 @@ class GamesController < ApplicationController
 
   def motion_clear
     seconds = 30
-    Rails.logger.info "Clearing games with motion greater than #{seconds} seconds..."
+    Rails.logger.info "Clearing games with motion older than #{seconds} seconds..."
     Game.all.find_each do |game|
       next if game.motion_active_at.nil?
       game.motion_active_at = nil if (Time.new - game.motion_active_at) >= seconds
@@ -21,6 +21,13 @@ class GamesController < ApplicationController
     render text: 'success'
   end
 
+  def new
+    @game = Game.new min_number_of_players_per_team: 1,
+                     rating_type: "trueskill",
+                     min_number_of_teams: 2,
+                     allow_ties: true
+  end
+
   def create
     @game = Game.new(games_params)
     @game.player_id = current_player.id
@@ -28,6 +35,7 @@ class GamesController < ApplicationController
     if @game.save
       redirect_to game_path(@game)
     else
+      @game.player_id = nil
       render :new
     end
   end
@@ -38,13 +46,6 @@ class GamesController < ApplicationController
   end
 
   def edit
-  end
-
-  def new
-    @game = Game.new min_number_of_players_per_team: 1,
-                     rating_type: "trueskill",
-                     min_number_of_teams: 2,
-                     allow_ties: true
   end
 
   def show

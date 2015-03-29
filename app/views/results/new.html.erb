@@ -1,6 +1,6 @@
 <div class="results-page results-page-new">
     <script type="text/javascript">
-        var maxNumberOfPlayersPerTeam = <%= @game.max_number_of_players_per_team %>;
+        var maxNumberOfPlayersPerTeam = <%= @game.max_number_of_players_per_team || @game.min_number_of_players_per_team %>;
         var gameAllowsTies = <%= @game.allow_ties %>;
         var players = <%= raw player_options.to_json %>;
     </script>
@@ -24,8 +24,9 @@
                             <%= select "result[teams][0]", :relation, ["defeated", "tied"], {} %>
                         <% else %>
                             <%= hidden_field_tag "result[teams][0][relation]", :defeated, {} %>
-                            Defeated:
+                            Defeated
                         <% end %>
+                        <i class="fa fa-caret-right"></i></i>
                     </div>
                 </div>
             </div>

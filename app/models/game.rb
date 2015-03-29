@@ -20,7 +20,9 @@ class Game < ActiveRecord::Base
   validates :min_number_of_teams, numericality: { only_integer: true, greater_than_or_equal_to: 2 }
   validates :max_number_of_teams, numericality: { only_integer: true, allow_nil: true }
   validate do |game|
-    if game.min_number_of_teams && game.max_number_of_teams && game.min_number_of_teams > game.max_number_of_teams
+    if game.min_number_of_teams && 
+       game.max_number_of_teams && 
+       game.min_number_of_teams > game.max_number_of_teams
       game.errors.add(:max_number_of_teams, "cannot be less than the minimum")
     end
   end
@@ -28,7 +30,9 @@ class Game < ActiveRecord::Base
   validates :min_number_of_players_per_team, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :max_number_of_players_per_team, numericality: { only_integer: true, allow_nil: true }
   validate do |game|
-    if game.min_number_of_players_per_team && game.max_number_of_players_per_team && game.min_number_of_players_per_team > game.max_number_of_players_per_team
+    if game.min_number_of_players_per_team && 
+       game.max_number_of_players_per_team && 
+       game.min_number_of_players_per_team > game.max_number_of_players_per_team
       game.errors.add(:max_number_of_teams, "cannot be less than the minimum")
     end
   end
