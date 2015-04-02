@@ -23,7 +23,7 @@
                     <% if ext.match(/mjpe?g/) %>
                         <img src="<%= @game.stream_url %>">
                     <% else %>
-                        <video width="320" height="240">
+                        <video autoplay>
                             <source src="<%= @game.stream_url %>" type="video/<%= ext %>">
                         </video>
                     <% end %>
