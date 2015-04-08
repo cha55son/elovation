@@ -38,6 +38,7 @@ cd <app dir>
 bin/rake secret > secret.key # Only do this once
 export SECRET_KEY_BASE=$(cat secret.key)
 export RAILS_ENV=production
+export RAILS_SERVE_STATIC_FILES=true # Use this if you are NOT going to use nginx/apache to serve static assets.
 rake db:migrate
 rake assets:clobber assets:precompile
 rails s # This should start unicorn
