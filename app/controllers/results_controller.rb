@@ -13,10 +13,12 @@ class ResultsController < ApplicationController
   end
 
   def destroy
+    unless @game.can_edit?(current_player)
+        Rails.logger.warn "User #{current_player.name} (#{current_player.id}) was not allowed to delete result id '#{params[:id]}' for game id '#{@game.id}'."
+        return redirect_to :back
+    end
     result = @game.results.find_by_id(params[:id])
-
     response = ResultService.destroy(result)
-
     redirect_to :back
   end
 

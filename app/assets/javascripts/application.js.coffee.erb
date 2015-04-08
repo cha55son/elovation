@@ -1,0 +1,56 @@
+# This is a manifest file that'll be compiled into application.js, which will include all the files
+# listed below.
+#
+# Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+# or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+#
+# It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# compiled file.
+#
+# Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+# about supported directives.
+#
+#= require jquery
+#= require jquery_ujs
+#= require lumen/loader
+#= require lumen/bootswatch
+#= require chosen.min
+#= require_tree .
+#= require turbolinks
+
+Turbolinks.enableTransitionCache()
+Turbolinks.enableProgressBar()
+ENV = '<%= Rails.env %>'
+
+# CoffeeScript routing based on the data-controller & data-action attributes on the body.
+# Use the following to trigger JS for a specific page:
+#
+# $(document).on 'turbolinks:event controller:action', ->
+#     console.log 'I made it to controller:action!'
+#
+ready = (event) ->
+    $body = $('body')
+    eventName = event + '/' + $body.data('controller') + ':' + $body.data('action')
+    if ENV == 'development'
+        console.log(eventName + ' triggered at ' + Date.now())
+    $(document).trigger eventName
+
+# page:before-change a Turbolinks-enabled link has been clicked
+# page:fetch         starting to fetch a new target page
+# page:receive       the page has been fetched from the server, but not yet parsed
+# page:before-unload the page has been parsed and is about to be changed
+# page:after-remove  a node (stored in event.data) has been removed from the DOM and should be cleaned up (jQuery data is cleaned up automatically)
+# page:change        the page has been changed to the new version (and on DOMContentLoaded)
+# page:update        is triggered alongside both page:change and jQuery's ajaxSuccess 
+#                    (if jQuery is available - otherwise you can manually trigger it when calling XMLHttpRequest in your own code)
+# page:load          is fired at the end of the loading process.
+# page:restore       is fired at the end of restore process.
+$(document).on('page:before-change', ready.bind(this, 'page:before-change'))
+$(document).on('page:fetch',         ready.bind(this, 'page:fetch'))
+$(document).on('page:recieve',       ready.bind(this, 'page:recieve'))
+$(document).on('page:before-unload', ready.bind(this, 'page:before-unload'))
+$(document).on('page:after-remove',  ready.bind(this, 'page:after-remove'))
+$(document).on('page:change',        ready.bind(this, 'page:change'))
+$(document).on('page:update',        ready.bind(this, 'page:update'))
+$(document).on('ready page:load',    ready.bind(this, 'page:load'))
+$(document).on('page:restore',       ready.bind(this, 'page:restore'))

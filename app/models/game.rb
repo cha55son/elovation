@@ -45,6 +45,8 @@ class Game < ActiveRecord::Base
 
   validates :allow_ties, inclusion: { in: [true, false], message: "must be selected" }
 
+  def owner; self.player; end
+
   def all_ratings
     ratings.order(value: :desc)
   end

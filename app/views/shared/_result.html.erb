@@ -23,8 +23,9 @@
             <% if show_game %>
                 in <%= link_to result.game.name, result.game %>
             <% end %>
-            <% if result.most_recent? -%>
-                <%= link_to "Delete", game_result_path(result.game, result), class: "btn btn-danger btn-xs result-delete", method: :delete, data: { confirm: "Are you sure?" } %>
+            <% if result.game.can_edit?(current_player) -%>
+                <%= link_to "&times;".html_safe, game_result_path(result.game, result), class: "result-delete", method: :delete, 
+                            data: { confirm: "Are you sure you want to delete this result?" } %>
             <% end -%>
         </span>
     </td>
