@@ -11,21 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322170109) do
+ActiveRecord::Schema.define(version: 20150430021241) do
 
   create_table "games", force: :cascade do |t|
-    t.string   "name",                           null: false
+    t.string   "name",                           limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "rating_type"
+    t.string   "rating_type",                    limit: 255
     t.integer  "min_number_of_teams"
     t.integer  "max_number_of_teams"
     t.integer  "min_number_of_players_per_team"
     t.integer  "max_number_of_players_per_team"
     t.boolean  "allow_ties"
-    t.string   "stream_url"
-    t.string   "motion_detected_title"
-    t.string   "motion_absent_title"
+    t.string   "stream_url",                     limit: 255
+    t.string   "motion_detected_title",          limit: 255
+    t.string   "motion_absent_title",            limit: 255
     t.datetime "motion_active_at"
     t.integer  "player_id"
   end
@@ -33,18 +33,18 @@ ActiveRecord::Schema.define(version: 20150322170109) do
   add_index "games", ["player_id"], name: "index_games_on_player_id"
 
   create_table "players", force: :cascade do |t|
-    t.string   "name",                                null: false
+    t.string   "name",                limit: 255,                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
-    t.string   "username",            default: "",    null: false
+    t.string   "email",               limit: 255
+    t.string   "username",            limit: 255, default: "",    null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       default: 0,     null: false
+    t.integer  "sign_in_count",                   default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.boolean  "is_admin",            default: false, null: false
+    t.string   "current_sign_in_ip",  limit: 255
+    t.string   "last_sign_in_ip",     limit: 255
+    t.boolean  "is_admin",                        default: false, null: false
   end
 
   add_index "players", ["username"], name: "index_players_on_username", unique: true
@@ -93,5 +93,15 @@ ActiveRecord::Schema.define(version: 20150322170109) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.string   "url",        null: false
+    t.integer  "game_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "webhooks", ["game_id"], name: "index_webhooks_on_game_id"
+  add_index "webhooks", ["url", "game_id"], name: "index_webhooks_on_url_and_game_id", unique: true
 
 end

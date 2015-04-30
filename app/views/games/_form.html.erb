@@ -1,4 +1,4 @@
-<%= form_for @game, html: {class: "form-horizontal"} do |f| %>
+<%= form_for @game, html: { class: "form-horizontal" } do |f| %>
     <%= f.hidden_field :min_number_of_players_per_team, value: 1, class: "input-mini" %>
     <%= f.hidden_field :min_number_of_teams, value: 2, class: "input-mini" %>
     <div class="row">
@@ -30,13 +30,6 @@
         </div>
     </div>
     <div class="form-group">
-        <%= f.label :max_number_of_players_per_team, 'Max players per team', class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-            <%= f.number_field :max_number_of_players_per_team, class: "form-control" %>
-            <p class="help-block">Leave blank for no restriction</p>
-        </div>
-    </div>
-    <div class="form-group">
         <%= f.label :max_number_of_teams, 'Maximum number of teams', class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
             <%= f.number_field :max_number_of_teams, class: "form-control" %>
@@ -44,7 +37,7 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-6">
+        <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
                 <label>
                     <%= f.check_box :allow_ties %> 
@@ -53,33 +46,65 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <%= f.label :stream_url, 'Streaming URL', class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-            <%= f.text_field :stream_url, class: "form-control" %>
-            <p class="help-block">
-                An HTML5 compatible video stream for the 
-                <a href="http://www.w3schools.com/html/html5_video.asp" target="_blank">&lt;video&gt;</a> tag.
-                Also supports MJPEG. <br> The url should end with the extension of the video type. (.mjpeg, .ogg, .webm)
-            </p>
-        </div>
+    <div class="col-sm-offset-3 col-sm-9">
+        <h4 class="page-header">
+            Advanced Options
+            <a class="btn btn-xs btn-default" data-toggle="collapse" href="#advanced-options-wrapper">
+                Open/Close
+            </a>
+        </h4>
     </div>
-    <div class="form-group">
-        <%= f.label :motion_detected_title, 'Motion Detected Title', class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-            <%= f.text_field :motion_detected_title, class: "form-control" %>
-            <p class="help-block">
-                Displayed when the route <strong><%= motion_game_path(@game.id ? @game.id : ':id') %></strong> is hit.
-            </p>
+    <div class="collapse" id="advanced-options-wrapper">
+        <div class="form-group">
+            <%= f.label :webhooks, 'Webhooks', class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+                <div class="input-group webhook-input-group add-webhook-input-group">
+                    <input type="text" name="game[webhooks_attributes][%][url]" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="webhook-btn add-webhook btn btn-success" type="button"></button>
+                    </span>
+                </div>
+                <%= f.fields_for :webhooks do |webhook_form| %>
+                    <div class="input-group webhook-input-group remove-webhook-input-group">
+                        <%= webhook_form.text_field :url, class: "form-control" %>
+                        <span class="input-group-btn">
+                            <button class="webhook-btn remove-webhook btn btn-danger" type="button"></button>
+                        </span>
+                    </div>
+                <% end %>
+                <p class="help-block">
+                    When a result is recorded a POST request will be sent to the url(s) above.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <%= f.label :motion_absent_title, 'Motion Absent Title', class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-            <%= f.text_field :motion_absent_title, class: "form-control" %>
-            <p class="help-block">
-                Displayed when the route <strong><%= motion_game_path(@game.id ? @game.id : ':id') %></strong> isn't hit in over 30 seconds.
-            </p>
+        <div class="form-group">
+            <%= f.label :stream_url, 'Streaming URL', class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+                <%= f.text_field :stream_url, class: "form-control" %>
+                <p class="help-block">
+                    An HTML5 compatible video stream for the 
+                    <a href="http://www.w3schools.com/html/html5_video.asp" target="_blank">&lt;video&gt;</a> tag.
+                    Also supports MJPEG. <br> The url should end with the extension of the video type. (.mjpeg, .ogg, .webm)
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :motion_detected_title, 'Motion Detected Title', class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+                <%= f.text_field :motion_detected_title, class: "form-control" %>
+                <p class="help-block">
+                    Displayed when the route <strong><%= motion_game_path(@game.id ? @game.id : ':id') %></strong> is hit.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :motion_absent_title, 'Motion Absent Title', class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+                <%= f.text_field :motion_absent_title, class: "form-control" %>
+                <p class="help-block">
+                    Displayed when the route <strong><%= motion_game_path(@game.id ? @game.id : ':id') %></strong> isn't hit in over 30 seconds.
+                </p>
+            </div>
         </div>
     </div>
     <div class="form-group">

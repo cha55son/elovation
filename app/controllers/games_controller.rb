@@ -53,7 +53,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    if @game.update_attributes(games_params)
+    if @game.update(games_params)
       redirect_to game_path(@game)
     else
       render :edit
@@ -71,16 +71,18 @@ class GamesController < ApplicationController
   end
 
   def games_params
-    params.require(:game).permit(:name,
-                                :rating_type,
-                                :min_number_of_teams,
-                                :max_number_of_teams,
-                                :min_number_of_players_per_team,
-                                :max_number_of_players_per_team,
-                                :allow_ties,
-                                :stream_url,
-                                :motion_detected_title,
-                                :motion_absent_title,
-                                :player_id)
+    params.require(:game).permit(
+        :name,
+        :rating_type,
+        :min_number_of_teams,
+        :max_number_of_teams,
+        :min_number_of_players_per_team,
+        :allow_ties,
+        :stream_url,
+        :motion_detected_title,
+        :motion_absent_title,
+        :player_id,
+        webhooks_attributes: [:id, :url]
+    )
   end
 end

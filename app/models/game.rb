@@ -1,7 +1,10 @@
 class Game < ActiveRecord::Base
-  has_many :ratings, dependent: :destroy
-  has_many :results, dependent: :destroy
+  has_many :ratings,  dependent: :destroy
+  has_many :results,  dependent: :destroy
+  has_many :webhooks, dependent: :destroy
   belongs_to :player
+
+  accepts_nested_attributes_for :webhooks, allow_destroy: true
 
   RATER_MAPPINGS = {
     "elo" => Rater::EloRater.new,
