@@ -16,7 +16,7 @@ $(document).on 'page:load/games:edit', ->
     $('.chosen-select').chosen()
 
 $(document).on 'page:load/games:edit page:load/games:new', ->
-    counter = 0
+    counter = 100
     $('.add-webhook').click (e) ->
         $parent = $(this).parents '.webhook-input-group'
         $input = $('input.form-control', $parent)
@@ -25,7 +25,7 @@ $(document).on 'page:load/games:edit page:load/games:new', ->
             alert 'Please enter a valid url.'
             return
         $clone = $parent.clone()
-        $('input.form-control', $clone).attr 'name', "game[webhooks_attributes][#{counter--}][url]"
+        $('input.form-control', $clone).attr 'name', "game[webhooks_attributes][#{counter++}][url]"
         $clone.removeClass 'add-webhook-input-group'
               .addClass 'remove-webhook-input-group'
               .css 'display', 'none'
@@ -42,7 +42,9 @@ $(document).on 'page:load/games:edit page:load/games:new', ->
     $(document).on 'click', '.remove-webhook', (e) ->
         $parent = $(this).parents '.webhook-input-group'
         $parent.fadeOut()
-        $parent.remove() if $parent.data('id') == undefined
-        $parent.append '<input type="hidden" value="1" name="game[webhooks_attributes][' + $parent.data('id') + '][_destroy]">'
+        if $parent.data('id') == undefined
+            $parent.remove() 
+        else
+            $parent.append '<input type="hidden" value="1" name="game[webhooks_attributes][' + $parent.data('index') + '][_destroy]">'
     $('.remove-webhook-input-group').keypress (e) ->
         e.preventDefault()
