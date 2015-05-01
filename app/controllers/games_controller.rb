@@ -26,6 +26,7 @@ class GamesController < ApplicationController
                      rating_type: "trueskill",
                      min_number_of_teams: 2,
                      allow_ties: true
+    @game.webhooks.build
   end
 
   def create
@@ -82,7 +83,7 @@ class GamesController < ApplicationController
         :motion_detected_title,
         :motion_absent_title,
         :player_id,
-        webhooks_attributes: [:id, :url]
+        webhooks_attributes: [:id, :url, :_destroy]
     )
   end
 end

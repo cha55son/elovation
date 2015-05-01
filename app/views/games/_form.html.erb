@@ -54,18 +54,20 @@
             </a>
         </h4>
     </div>
-    <div class="collapse" id="advanced-options-wrapper">
+    <div class="collapse in" id="advanced-options-wrapper">
         <div class="form-group">
             <%= f.label :webhooks, 'Webhooks', class: "col-sm-3 control-label" %>
             <div class="col-sm-9">
-                <div class="input-group webhook-input-group add-webhook-input-group">
-                    <input type="text" name="game[webhooks_attributes][%][url]" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="webhook-btn add-webhook btn btn-success" type="button"></button>
-                    </span>
-                </div>
+                <%= f.fields_for :webhooks, Webhook.new do |webhook_form| %>
+                    <div class="input-group webhook-input-group add-webhook-input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="webhook-btn add-webhook btn btn-success" type="button"></button>
+                        </span>
+                    </div>
+                <% end %>
                 <%= f.fields_for :webhooks do |webhook_form| %>
-                    <div class="input-group webhook-input-group remove-webhook-input-group">
+                    <div class="input-group webhook-input-group remove-webhook-input-group" data-id="<%= webhook_form.object.id %>">
                         <%= webhook_form.text_field :url, class: "form-control" %>
                         <span class="input-group-btn">
                             <button class="webhook-btn remove-webhook btn btn-danger" type="button"></button>
