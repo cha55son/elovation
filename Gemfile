@@ -8,7 +8,7 @@ gem 'dynamic_form'
 gem 'elo'
 gem 'trueskill', github: 'saulabs/trueskill', require: 'saulabs/trueskill'
 
-gem 'rails', '4.2.1'
+gem 'rails', '~> 4.2.1'
 gem 'sqlite3'
 gem 'less-rails', '~> 2.7.0'
 gem 'uglifier', '>= 1.3.0'
@@ -27,7 +27,8 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
   gem 'spring'
   gem 'quiet_assets'
+  gem "better_errors"
 end

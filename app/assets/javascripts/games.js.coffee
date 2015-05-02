@@ -47,4 +47,4 @@ $(document).on 'page:load/games:edit page:load/games:new', ->
         else
             $parent.append '<input type="hidden" value="1" name="game[webhooks_attributes][' + $parent.data('index') + '][_destroy]">'
     $('.remove-webhook-input-group').keypress (e) ->
-        e.preventDefault()
+        e.preventDefault() if e.which == 13
