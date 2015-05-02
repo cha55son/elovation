@@ -15,7 +15,7 @@ $(document).on 'page:load/games:show', ->
 $(document).on 'page:load/games:edit', ->
     $('.chosen-select').chosen()
 
-$(document).on 'page:load/games:edit page:load/games:new', ->
+$(document).on 'page:update/games:update page:load/games:edit page:load/games:new', ->
     counter = 100
     $('.add-webhook').click (e) ->
         $parent = $(this).parents '.webhook-input-group'
