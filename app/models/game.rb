@@ -5,6 +5,7 @@ class Game < ActiveRecord::Base
   belongs_to :player
 
   accepts_nested_attributes_for :webhooks, allow_destroy: true
+  before_validation :default_values
 
   RATER_MAPPINGS = {
     "elo" => Rater::EloRater.new,
@@ -48,18 +49,19 @@ class Game < ActiveRecord::Base
 
   validates :allow_ties, inclusion: { in: [true, false], message: "must be selected" }
 
+  def default_values
+    if self.rating_type == 'elo'
+        self.min_number_of_teams = 2
+        self.max_number_of_teams = 2
+        self.min_number_of_players_per_team = 1
+        self.max_number_of_players_per_team = 1
+    end
+  end
+
   def owner; self.player; end
 
   def all_ratings
     ratings.order(value: :desc)
-  end
-
-  def as_json(options = {})
-    {
-      name: name,
-      ratings: top_ratings.map(&:as_json),
-      results: recent_results.map(&:as_json)
-    }
   end
 
   def players

@@ -22,15 +22,15 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = Game.new min_number_of_players_per_team: 1,
-                     rating_type: "trueskill",
-                     min_number_of_teams: 2,
+    @game = Game.new rating_type: "trueskill",
                      allow_ties: true
-    @game.webhooks.build
   end
 
   def create
     @game = Game.new(games_params)
+    # Force the minimums for the time being.
+    @game.min_number_of_teams = 2
+    @game.min_number_of_players_per_team = 1
     @game.player_id = current_player.id
 
     if @game.save
@@ -75,9 +75,8 @@ class GamesController < ApplicationController
     params.require(:game).permit(
         :name,
         :rating_type,
-        :min_number_of_teams,
         :max_number_of_teams,
-        :min_number_of_players_per_team,
+        :max_number_of_players_per_team,
         :allow_ties,
         :stream_url,
         :motion_detected_title,
