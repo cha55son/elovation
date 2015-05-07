@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430021241) do
+ActiveRecord::Schema.define(version: 20150507014459) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name",                           limit: 255, null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150430021241) do
     t.string   "motion_absent_title",            limit: 255
     t.datetime "motion_active_at"
     t.integer  "player_id"
+    t.string   "description"
   end
 
   add_index "games", ["player_id"], name: "index_games_on_player_id"

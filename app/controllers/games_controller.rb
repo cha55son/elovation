@@ -50,7 +50,8 @@ class GamesController < ApplicationController
   end
 
   def show
-    @ratings = @game.all_ratings.select(&:active?)
+    @ratings = @game.all_ratings.limit(20)
+    @markdown_html = parse_markdown(@game.description)
   end
 
   def update
@@ -82,6 +83,7 @@ class GamesController < ApplicationController
         :motion_detected_title,
         :motion_absent_title,
         :player_id,
+        :description,
         webhooks_attributes: [:id, :url, :_destroy]
     )
   end
