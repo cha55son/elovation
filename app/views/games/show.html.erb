@@ -31,7 +31,7 @@
             <% end %>
         </div>
     </div>
-    <% if @game.description.chomp.length > 0 %>
+    <% if !@game.description.nil? && @game.description.chomp.length > 0 %>
         <div class="well markdown description-well">
             <%= @markdown_html %> 
         </div>

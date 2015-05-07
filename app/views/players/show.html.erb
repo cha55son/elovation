@@ -7,7 +7,7 @@
             </div>
         <% end %>
     </h1>
-    <% if @player.bio.chomp.length > 0 %>
+    <% if !@player.bio.nil? && @player.bio.chomp.length > 0 %>
         <div class="markdown-wrapper">
             <div class="well markdown-well markdown">
                 <%= @markdown_html %>
