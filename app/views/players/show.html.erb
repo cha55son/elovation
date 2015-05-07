@@ -1,7 +1,20 @@
 <div class="player-page player-page-show">
     <h1 class="page-header">
         <%= player_badge(@player, img_size: 45, has_link: false) %>
+        <% if @player.can_edit?(current_player) %>
+            <div class="actions pull-right">
+                <%= link_to 'Edit', edit_player_path(@player), class: "btn btn-primary" %>
+            </div>
+        <% end %>
     </h1>
+    <% if @player.bio.chomp.length > 0 %>
+        <div class="markdown-wrapper">
+            <div class="well markdown-well markdown">
+                <%= @markdown_html %>
+            </div>
+            <div class="markdown-show-more btn btn-default">Show More</div>
+        </div>
+    <% end %>
     <div class="row">
         <div class="col-sm-8">
             <h3>Recent Results</h3>

@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   end
 
   get '/dashboard' => 'dashboard#show', as: :dashboard
+  post '/markdown' => 'markdown#create', as: :create_markdown
   root to: 'dashboard#show'
 end

@@ -14,7 +14,22 @@ $(document).on 'page:load/games:show', ->
 
 $(document).on 'page:load/games:edit', ->
     $('.chosen-select').chosen()
+    $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) ->
+        return if $(e.target).attr('href') != '#preview'
+        $textarea = $('#game_description')
+        val = $textarea.val()
+        return if !val || $textarea.data('text') == val
+        $textarea.data('text', val)
+        $.ajax 
+            url: '/markdown',
+            method: 'POST',
+            data:
+                text: val
+            success: (data, status) ->
+                return unless status == 'success'
+                $('#game_description_preview').html(data)
 
+# Handle webhooks on the edit page
 $(document).on 'page:update/games:update page:load/games:edit page:load/games:new', ->
     counter = 100
     $('.add-webhook').click (e) ->

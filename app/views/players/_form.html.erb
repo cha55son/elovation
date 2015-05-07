@@ -1,29 +1,32 @@
-<%= form_for @player, html: {class: "form-horizontal"} do |f| %>
-  <%= f.error_messages %>
-
-  <h1>Player</h1>
-  
-  <div class="control-group">
-    <%= f.label :name, class: "control-label" %>
-    <div class="controls">
-      <%= f.text_field :name, class: "input-xlarge" %>
+<%= form_for @player, html: { class: "form-horizontal" } do |f| %>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-9">
+            <%= render partial: 'shared/errors', object: @player %>
+        </div>
     </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :email, class: "control-label" %>
-    <div class="controls">
-      <%= f.text_field :email, class: "input-xlarge" %>
+    <div class="form-group">
+        <%= f.label :bio, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit</a></li>
+                    <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Preview</a></li>
+                </ul>
+            </div>
+            <div class="tab-content" style="padding: 10px">
+                <div role="tabpanel" class="tab-pane active" id="edit">
+                    <%= f.text_area :bio, rows: 12, class: "form-control" %>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="preview">
+                    <div class="well markdown" id="player_bio_preview"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit class: "btn btn-primary" %>
-    <%= link_to "Cancel", root_path, class: "btn btn-warning" %>
-  </div>
-
-  <small class="description attribution">
-    Avatar provided by <a href="http://gravatar.com/">Gravatar</a>, a global avatar service.
-  </small>
-
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-6">
+            <%= f.submit class: "btn btn-primary" %>
+            <%= link_to "Cancel", :back, class: "btn btn-default" %>
+        </div>
+    </div>
 <% end %>

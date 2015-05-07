@@ -61,6 +61,10 @@ class Player < ActiveRecord::Base
     rating.rewind!
   end
 
+  def can_edit?(user)
+    user.is_admin == true || user.id == id
+  end
+
   # Hold over to satisfy devise's :database_authenticatable
   def encrypted_password; end
   def encrypted_password=(val); end

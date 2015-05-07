@@ -51,6 +51,25 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <%= f.label :description, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit</a></li>
+                    <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab">Preview</a></li>
+                </ul>
+            </div>
+            <div class="tab-content" style="padding: 10px">
+                <div role="tabpanel" class="tab-pane active" id="edit">
+                    <%= f.text_area :description, class: "form-control" %>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="preview">
+                    <div class="well markdown" id="game_description_preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-sm-offset-3 col-sm-9">
         <h4 class="page-header">
             Advanced Options

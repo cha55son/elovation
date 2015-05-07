@@ -31,6 +31,11 @@
             <% end %>
         </div>
     </div>
+    <% if @game.description.chomp.length > 0 %>
+        <div class="well markdown description-well">
+            <%= @markdown_html %> 
+        </div>
+    <% end %>
     <div class="row">
         <div class="col-sm-8">
             <h3>
@@ -46,7 +51,7 @@
             <% end %>
         </div>
         <div class="col-sm-4">
-            <h3>Player Ratings</h3>
+            <h3>Top 20 Ratings</h3>
             <% if @ratings.length > 0 %>
                 <table class="table table-striped">
                     <thead>
