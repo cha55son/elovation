@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507014459) do
+ActiveRecord::Schema.define(version: 20150507040726) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name",                           limit: 255, null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150507014459) do
     t.string   "current_sign_in_ip",  limit: 255
     t.string   "last_sign_in_ip",     limit: 255
     t.boolean  "is_admin",                        default: false, null: false
+    t.string   "bio"
   end
 
   add_index "players", ["username"], name: "index_players_on_username", unique: true

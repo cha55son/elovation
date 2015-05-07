@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
   end
 
   def show
+      @markdown_html = parse_markdown(@player.bio)
   end
 
   def update
@@ -22,6 +23,6 @@ class PlayersController < ApplicationController
   end
 
   def player_params
-    params.require(:player).permit(:name, :email)
+    params.require(:player).permit(:bio)
   end
 end
