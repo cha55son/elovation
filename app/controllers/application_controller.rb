@@ -13,20 +13,19 @@ class ApplicationController < ActionController::Base
   private
 
   def init_markdown
-    options = {
+    renderer = Redcarpet::Render::HTML.new({
         filter_html: true,
-        hard_wrap: true, 
-        link_attributes: { rel: 'nofollow', target: "_blank" },
-        space_after_headers: true, 
-        fenced_code_blocks: true
-    }
-    extensions = {
+        no_styles: true,
+        hard_wrap: true,
+        prettify: true,
+        link_attributes: { rel: 'nofollow', target: "_blank" }
+    })
+    @markdown = Redcarpet::Markdown.new(renderer, {
         autolink: true,
         superscript: true,
-        prettify: true
-    }
-    renderer = Redcarpet::Render::HTML.new(options)
-    @markdown = Redcarpet::Markdown.new(renderer, extensions)
+        space_after_headers: true, 
+        fenced_code_blocks: true
+    })
   end
 
   def parse_markdown(text)
